@@ -3,9 +3,9 @@
 package com.sakila.models;
 
 public class Payment {
-    private int id;
-    private int customerId;
-    private double amount;
+    private int id;           // Identificador único del pago
+    private int customerId;   // ID del cliente que realiza el pago
+    private double amount;    // Monto del pago
 
     // Constructor
     public Payment(int id, int customerId, double amount) {

@@ -25,7 +25,7 @@ public class CustomerService {
         if (conn == null || conn.isClosed()) {
             throw new SQLException("La conexión a la base de datos no está disponible.");
         }
-        return customerEntity.getAll(limit, offset, conn);
+        return customerEntity.getAll(limit, offset, conn); // Error potencial: "customerEntity.getAll" podría no existir o no estar implementado correctamente.
     }
 
     // Buscar cliente por ID
@@ -36,7 +36,7 @@ public class CustomerService {
         if (conn == null || conn.isClosed()) {
             throw new SQLException("La conexión a la base de datos no está disponible.");
         }
-        return customerEntity.getById(id, conn);
+        return customerEntity.getById(id, conn); // Error potencial: "customerEntity.getById" podría no estar implementado o no aceptar parámetros correctamente.
     }
 
     // Agregar cliente
@@ -47,7 +47,7 @@ public class CustomerService {
         if (conn == null || conn.isClosed()) {
             throw new SQLException("La conexión a la base de datos no está disponible.");
         }
-        return customerEntity.add(customer, conn);
+        return customerEntity.add(customer, conn); // Error potencial: "customerEntity.add" podría no existir o no funcionar correctamente.
     }
 
     // Actualizar cliente
@@ -61,7 +61,7 @@ public class CustomerService {
         if (conn == null || conn.isClosed()) {
             throw new SQLException("La conexión a la base de datos no está disponible.");
         }
-        return customerEntity.update(id, customer, conn);
+        return customerEntity.update(id, customer, conn); // Error potencial: "customerEntity.update" podría no estar implementado o no ser compatible.
     }
 
     // Eliminar cliente
@@ -72,7 +72,6 @@ public class CustomerService {
         if (conn == null || conn.isClosed()) {
             throw new SQLException("La conexión a la base de datos no está disponible.");
         }
-        return customerEntity.delete(id, conn);
+        return customerEntity.delete(id, conn); // Error potencial: "customerEntity.delete" podría no estar implementado o no ser compatible.
     }
 }
-

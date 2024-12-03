@@ -1,21 +1,22 @@
-
 package com.sakila.data;
 
 import java.util.List;
 
+// Interfaz genérica que define las operaciones básicas de CRUD (Crear, Leer, Actualizar, Eliminar)
 public interface DataContext<T> {
-    // Obtener todos los registros
+
+    // Método para obtener todos los registros
     List<T> getAll();
 
-    // Obtener un registro por ID
+    // Método para obtener un registro por ID
     T get(int id);
 
-    // Crear un nuevo registro
+    // Método para crear un nuevo registro
     boolean post(T entity);
 
-    // Actualizar un registro existente
+    // Método para actualizar un registro existente
     boolean put(int id, T entity);
 
-    // Eliminar un registro
+    // Método para eliminar un registro
     boolean delete(int id);
 }

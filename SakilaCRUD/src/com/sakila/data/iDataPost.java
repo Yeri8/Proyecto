@@ -3,10 +3,21 @@ package com.sakila.data;
 
 import java.util.List;
 
+// Interfaz para las operaciones básicas de acceso a datos, con un enfoque más simplificado
 public interface iDataPost<T> {
-    void post(T entity);  // Crear (Insertar)
-    List<T> get();        // Obtener todos los registros
-    T getById(int id);    // Obtener un registro por su ID
-    void put(T entity);   // Actualizar
-    void delete(int id);  // Eliminar (Marcar como inactivo)
+
+    // Método para crear o insertar un nuevo registro
+    void post(T entity);
+
+    // Método para obtener todos los registros
+    List<T> get();
+
+    // Método para obtener un registro por su ID
+    T getById(int id);
+
+    // Método para actualizar un registro existente
+    void put(T entity);
+
+    // Método para eliminar un registro (o marcarlo como inactivo)
+    void delete(int id);
 }

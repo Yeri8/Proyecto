@@ -11,14 +11,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ActorUI {
+    // Atributos: controlador para gestionar actores y scanner para leer la entrada del usuario
     private final ActorController actorController;
     private final Scanner scanner;
 
+    // Constructor: inicializa el controlador de actores y el scanner
     public ActorUI(ActorController actorController) {
         this.actorController = actorController;
         this.scanner = new Scanner(System.in);
     }
 
+    // Método para mostrar el menú principal
     public void displayMenu() {
         int option;
         try {
@@ -27,6 +30,7 @@ public class ActorUI {
 
             // Crear la conexión a la base de datos
             try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root", "Enmanuel0712")) {
+                // Bucle que muestra el menú y ejecuta las operaciones elegidas
                 do {
                     System.out.println("\n--- Gestión de Actores ---");
                     System.out.println("1. Ver todos los actores");
@@ -38,16 +42,17 @@ public class ActorUI {
                     System.out.print("Seleccione una opción: ");
                     option = scanner.nextInt();
                     scanner.nextLine(); // Limpiar el buffer
+                    // Ejecutar la opción seleccionada
                     switch (option) {
-                        case 1 -> listActors(conn);
-                        case 2 -> findActorById(conn);
-                        case 3 -> addActor(conn);
-                        case 4 -> updateActor(conn);
-                        case 5 -> deleteActor(conn);
-                        case 0 -> System.out.println("Saliendo...");
+                        case 1 -> listActors(conn); // Ver todos los actores
+                        case 2 -> findActorById(conn); // Buscar actor por ID
+                        case 3 -> addActor(conn); // Agregar nuevo actor
+                        case 4 -> updateActor(conn); // Actualizar actor
+                        case 5 -> deleteActor(conn); // Eliminar actor
+                        case 0 -> System.out.println("Saliendo..."); // Salir
                         default -> System.out.println("Opción inválida. Intente nuevamente.");
                     }
-                } while (option != 0);
+                } while (option != 0); // Continuar mostrando el menú hasta que elija salir
             } catch (SQLException e) {
                 System.out.println("Error al conectar con la base de datos: " + e.getMessage());
             }
@@ -56,13 +61,16 @@ public class ActorUI {
         }
     }
 
+    // Método para listar todos los actores
     private void listActors(Connection conn) {
         System.out.println("\n--- Lista de Actores ---");
         try {
-            List<Actor> actors = actorController.getAllActors(10, 0, conn); // Paginación
+            // Obtener los actores con paginación (10 actores por página)
+            List<Actor> actors = actorController.getAllActors(10, 0, conn);
             if (actors.isEmpty()) {
                 System.out.println("No hay actores disponibles.");
             } else {
+                // Mostrar cada actor en la lista
                 actors.forEach(System.out::println);
             }
         } catch (SQLException e) {
@@ -70,16 +78,18 @@ public class ActorUI {
         }
     }
 
+    // Método para buscar un actor por su ID
     private void findActorById(Connection conn) {
         System.out.print("Ingrese el ID del actor: ");
         int id = scanner.nextInt();
         scanner.nextLine(); // Limpiar buffer
 
         try {
-            Actor actor = actorController.getActorById(id, conn); // Buscar actor por ID
+            // Buscar el actor por ID usando el controlador
+            Actor actor = actorController.getActorById(id, conn);
             if (actor != null) {
                 System.out.println("\nDetalles del actor:");
-                System.out.println(actor);
+                System.out.println(actor); // Mostrar detalles del actor
             } else {
                 System.out.println("Actor no encontrado.");
             }
@@ -88,15 +98,18 @@ public class ActorUI {
         }
     }
 
+    // Método para agregar un nuevo actor
     private void addActor(Connection conn) {
         System.out.print("Ingrese el nombre del actor: ");
         String firstName = scanner.nextLine();
         System.out.print("Ingrese el apellido del actor: ");
         String lastName = scanner.nextLine();
 
-        Actor actor = new Actor(0, firstName, lastName);  // El ID se genera automáticamente
+        // Crear un nuevo objeto Actor (el ID será generado automáticamente)
+        Actor actor = new Actor(0, firstName, lastName);  
         try {
-            boolean success = actorController.addActor(actor, conn); // Agregar actor
+            // Intentar agregar el actor a la base de datos usando el controlador
+            boolean success = actorController.addActor(actor, conn);
             if (success) {
                 System.out.println("Actor agregado exitosamente.");
             } else {
@@ -107,6 +120,7 @@ public class ActorUI {
         }
     }
 
+    // Método para actualizar un actor
     private void updateActor(Connection conn) {
         System.out.print("Ingrese el ID del actor a actualizar: ");
         int id = scanner.nextInt();
@@ -116,9 +130,11 @@ public class ActorUI {
         System.out.print("Ingrese el nuevo apellido del actor: ");
         String lastName = scanner.nextLine();
 
+        // Crear un objeto Actor con los nuevos datos
         Actor actor = new Actor(id, firstName, lastName);
         try {
-            boolean success = actorController.updateActor(id, actor, conn); // Actualizar actor
+            // Intentar actualizar el actor en la base de datos
+            boolean success = actorController.updateActor(id, actor, conn);
             if (success) {
                 System.out.println("Actor actualizado exitosamente.");
             } else {
@@ -129,13 +145,15 @@ public class ActorUI {
         }
     }
 
+    // Método para eliminar un actor
     private void deleteActor(Connection conn) {
         System.out.print("Ingrese el ID del actor a eliminar: ");
         int id = scanner.nextInt();
         scanner.nextLine(); // Limpiar buffer
 
         try {
-            boolean success = actorController.deleteActor(id, conn); // Eliminar actor
+            // Intentar eliminar el actor usando el controlador
+            boolean success = actorController.deleteActor(id, conn);
             if (success) {
                 System.out.println("Actor eliminado exitosamente.");
             } else {
@@ -146,4 +164,3 @@ public class ActorUI {
         }
     }
 }
-

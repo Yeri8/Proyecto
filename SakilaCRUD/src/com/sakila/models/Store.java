@@ -2,9 +2,9 @@
 package com.sakila.models;
 
 public class Store {
-    private int storeId;
-    private int managerStaffId;
-    private String address;
+    private int storeId;           // Identificador único de la tienda
+    private int managerStaffId;    // ID del empleado que gestiona la tienda
+    private String address;        // Dirección de la tienda
 
     // Constructor con todos los parámetros
     public Store(int storeId, int managerStaffId, String address) {
