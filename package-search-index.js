@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.sakila.controllers"},{"l":"com.sakila.data"},{"l":"com.sakila.entities"},{"l":"com.sakila.main"},{"l":"com.sakila.models"},{"l":"com.sakila.ui"},{"l":"interfaces"},{"l":"reports"},{"l":"services"},{"l":"tests"},{"l":"utils"}];updateSearchResults();

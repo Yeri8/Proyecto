@@ -1,0 +1,11 @@
+com.sakila.controllers
+com.sakila.data
+com.sakila.entities
+com.sakila.main
+com.sakila.models
+com.sakila.ui
+interfaces
+reports
+services
+tests
+utils
